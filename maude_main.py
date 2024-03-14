@@ -1,5 +1,18 @@
-# This app allows users to search the maude database
+#!/usr/bin/env python
+'''streamlit-learning.py: A MAUDE search application written in Streamlit'''
 
+__author__ = 'Christopher Mattar'
+__copyright__ = 'Copyright (C) 2024 Christopher Mattar'
+__credits__ = ['Christopher Mattar', 'Allan Fong']
+__license__ = 'GPLv3'
+__version__ = '0.9'
+__maintainer__ = 'Christopher Mattar'
+__email__ = 'Allan.Fong@medstar.net'
+__status__ = 'Development'
+
+# This app allows users to search the maude database
+import datetime
+import re
 import streamlit as st
 
 st.set_page_config(layout='wide')
