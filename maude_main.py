@@ -62,7 +62,7 @@ if results.empty:
     st.write('No results found. Try:')
     st.markdown('- Checking for typos or misspelling\n- Increase your date range')
 else:
-    st.write(type(results))
+    st.write(results.shape[0])
     st.write(results)
     
 
