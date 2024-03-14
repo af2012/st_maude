@@ -59,7 +59,7 @@ for query in full_query.split():
 
 if results.empty:
     st.write('No results found. Try:')
-    st.markdown('- Checking for typos or misspelling\n- Increase your date range\n- Use less filters')
+    st.markdown('- Checking for typos or misspelling\n- Increase your date range\n-')
 else:
     st.write(results)
     
