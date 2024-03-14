@@ -53,17 +53,18 @@ if st.button('Search', type="primary"):
 
 full_query = st.session_state.full_query # retrieve full query from streamlit
 
-### Process search results
-for query in full_query.split():
-    results = maudeApi.fetch_data(query)
+#---- after user enters search ---#
+if full_query:
+    for query in full_query.split():
+        results = maudeApi.fetch_data(query)
 
 #---- check there are search results ---#
-if results.empty:
-    st.write('No results found. Try:')
-    st.markdown('- Checking for typos or misspelling\n- Increase your date range')
-else:
-    st.write(results.shape[0])
-    st.write(results)
+    if results.empty:
+        st.write('No results found. Try:')
+        st.markdown('- Checking for typos or misspelling\n- Increase your date range')
+    else:
+        st.write(results.shape[0])
+        st.write(results)
     
 
 
