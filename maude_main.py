@@ -63,7 +63,7 @@ if full_query:
         st.write('No results found. Try:')
         st.markdown('- Checking for typos or misspelling\n- Increase your date range')
     else:
-        st.write(results.shape[0])
+        st.write('Number of search results: ' + str(results.shape[0]))
         st.write(results)
     
 
