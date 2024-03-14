@@ -1,0 +1,49 @@
+.highlight {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+}
+
+.highlight:hover {
+    color: blue;
+}
+
+.malfunction {
+    background-color: orange;
+}
+
+.injury {
+    background-color: orangered;
+}
+
+.death {
+    background-color: #aa0000;
+}
+
+.event-text {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 14px !important;
+    border-radius: 10px;
+    gap: 0rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+footer {
+    visibility: hidden;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 1px grey solid;
+    padding-top: 8px;
+    background-color: black;
+    scroll-behavior: inherit;
+}
