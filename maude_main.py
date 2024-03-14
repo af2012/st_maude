@@ -47,7 +47,7 @@ def has_searched(s):
         return True
     return False
 
-st.text_input("Search query", key="full_query")
+st.text_input("Search query (try epipen, insulin pump)", key="full_query")
 if st.button('Search', type="primary"):
     st.rerun()
 
@@ -57,10 +57,12 @@ full_query = st.session_state.full_query # retrieve full query from streamlit
 for query in full_query.split():
     results = maudeApi.fetch_data(query)
 
+#---- check there are search results ---#
 if results.empty:
     st.write('No results found. Try:')
     st.markdown('- Checking for typos or misspelling\n- Increase your date range')
 else:
+    st.write(type(results))
     st.write(results)
     
 
