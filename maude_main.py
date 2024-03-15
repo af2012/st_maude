@@ -14,6 +14,9 @@ __status__ = 'Development'
 import datetime
 import re
 import streamlit as st
+import requests
+import pandas as pd
+import numpy as np
 
 import maude.api as maudeApi
 import maude.charts as maudeCharts
@@ -57,8 +60,7 @@ user_input_1 = st.session_state.full_query # retrieve full query from streamlit
 if user_input_1:
     user_input_4 = '('+'+AND+'.join(user_input_1.split(' '))+')'
     st.write(user_input_4)
-    #resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=10')
-    resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:"(empty)"&limit=10')
+    resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=10')
     
 #---- check there are search results ---#
     if resp.status_code != 200:
