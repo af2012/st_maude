@@ -11,6 +11,9 @@ __email__ = 'Allan.Fong@medstar.net'
 __status__ = 'Development'
 
 # This app allows users to search the maude database
+# TO DO: optimize Or search and count
+# TO DO: grab sentence by unique report
+# TO DO: link to actual report
 import datetime
 import re
 import streamlit as st
