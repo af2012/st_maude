@@ -52,6 +52,7 @@ if st.button('Search', type="primary"):
     st.rerun()
 
 user_input_1 = st.session_state.full_query # retrieve full query from streamlit
+st.write(user_input_1)
 
 #---- after user enters search ---#
 if user_input_1:
