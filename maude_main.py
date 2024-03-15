@@ -93,7 +93,10 @@ if user_input_1:
         user_input_clean_3 = re.sub(r'\)', '', user_input_clean_2)
         user_input_clean_4 = re.sub(r'  ', ' ', user_input_clean_3)
 
+        st.write(user_input_clean_4)
+
         user_tokens = user_input_4.split(' ')
+        st.write(user_tokens)
         token = user_tokens[0] # always use first token to create base dataframe
         #re_pattern = re.compile(user_input_1, re.IGNORECASE)
         
