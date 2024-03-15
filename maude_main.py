@@ -50,7 +50,7 @@ def has_searched(s):
         return True
     return False
 
-st.text_input("Search query (try epipen, insulin pump)", key="full_query")
+st.text_input("Search query (not case sensitive: try epipen, insulin pump, oxygen, oxygen AND tank, empty AND (oxygen OR o2) and tank)", key="full_query")
 if st.button('Search', type="primary"):
     st.rerun()
 
@@ -58,7 +58,7 @@ user_input_1 = st.session_state.full_query # retrieve full query from streamlit
 
 #---- after user enters search ---#
 if user_input_1:
-    user_input_4 = '('+'+AND+'.join(user_input_1.split(' '))+')'
+    user_input_4 = '('+'+'.join(user_input_1.split(' '))+')'   # split with space and combine with '+' and add ( )
     st.write(user_input_4)
     resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=10')
     
