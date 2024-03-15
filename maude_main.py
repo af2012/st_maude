@@ -68,13 +68,14 @@ if user_input_1:
         st.markdown('- Checking for typos or misspelling\n- Increase your date range')
     else:
         df = pd.DataFrame(resp.json()['results'])
-        st.write('Number of search results: ' + str(df.shape[0]))
-        st.write(df)
 
         # shorten columns
         df = df[['report_number', 'event_type', 'type_of_report', 'date_received', 'device', 'product_problems', 'mdr_text']]
         # date_added, device_date_of_manufacturer, date_report, manufacturer_contact_address_1
         
+        st.write('Number of search results: ' + str(df.shape[0]))
+        st.write(df)
+
         ##############################
         # combine mdr_text
         df['combine_text'] = ''
