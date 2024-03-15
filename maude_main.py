@@ -63,7 +63,7 @@ user_input_1 = st.session_state.full_query # retrieve full query from streamlit
 if user_input_1:
     user_input_4 = '('+'+'.join(user_input_1.split(' '))+')'   # split with space and combine with '+' and add ( )
     st.write(user_input_4)
-    resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=10')
+    resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=500')
     
 #---- check there are search results ---#
     if resp.status_code != 200:
@@ -96,10 +96,10 @@ if user_input_1:
         user_input_clean_3 = re.sub(r'\)', '', user_input_clean_2)
         user_input_clean_4 = re.sub(r'  ', ' ', user_input_clean_3)
 
-        st.write(user_input_clean_4)
+        # st.write(user_input_clean_4)
 
         user_tokens = user_input_clean_4.split(' ')
-        st.write(user_tokens)
+        # st.write(user_tokens)
         token = user_tokens[0] # always use first token to create base dataframe
         #re_pattern = re.compile(user_input_1, re.IGNORECASE)
         
