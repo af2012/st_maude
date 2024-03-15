@@ -51,20 +51,66 @@ st.text_input("Search query (try epipen, insulin pump)", key="full_query")
 if st.button('Search', type="primary"):
     st.rerun()
 
-full_query = st.session_state.full_query # retrieve full query from streamlit
+user_input_1 = st.session_state.full_query # retrieve full query from streamlit
 
 #---- after user enters search ---#
-if full_query:
-    for query in full_query.split():
-        results = maudeApi.fetch_data(query)
-
+if user_input_1:
+    user_input_4 = '('+'+AND+'.join(user_input_1.split(' '))+')'
+    resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=10')
+    
 #---- check there are search results ---#
-    if results.empty:
+    if resp.status_code != 200:
         st.write('No results found. Try:')
         st.markdown('- Checking for typos or misspelling\n- Increase your date range')
     else:
-        st.write('Number of search results: ' + str(results.shape[0]))
-        st.write(results)
+        df = pd.DataFrame(resp.json()['results'])
+        st.write('Number of search results: ' + str(df.shape[0]))
+        st.write(df)
+
+        # shorten columns
+        df = df[['report_number', 'event_type', 'type_of_report', 'date_received', 'device', 'product_problems', 'mdr_text']]
+        # date_added, device_date_of_manufacturer, date_report, manufacturer_contact_address_1
+        
+        ##############################
+        # combine mdr_text
+        df['combine_text'] = ''
+        for i in range(0, df.shape[0]):
+            temp_mdr_text = df.loc[i,'mdr_text']
+            temp_combine_text = ''
+            for t in temp_mdr_text:
+                temp_combine_text = temp_combine_text + t['text'] + ' '
+            df.loc[i,'combine_text'] = temp_combine_text
+            
+        ##############################
+        # clip text
+        user_tokens = user_input_1.split(' ')
+        token = user_tokens[0] # always use first token to create base dataframe
+        #re_pattern = re.compile(user_input_1, re.IGNORECASE)
+        
+        match_str_list = []
+        text_list = list(df['combine_text'])
+        for text in text_list:
+            for m in re.finditer(token, text, re.IGNORECASE):
+                ms = m.start()-70
+                ms = 0 if ms<0 else ms
+                me = m.end()+70
+                t1 = text[ms:me]
+                match_str_list.append(t1)
+        match_str_df = pd.DataFrame({'clip':match_str_list})
+        match_str_df[token] = 1
+        
+        if len(user_tokens)>1:
+            for i in range(1, len(user_tokens)):
+                temp_token = user_tokens[i]
+                match_str_df[temp_token] = 0
+                match_str_df.loc[match_str_df['clip'].str.contains(r'(?i)'+temp_token), temp_token] = 1
+        match_str_df['matched_cnt'] = np.sum(match_str_df[user_tokens], axis=1)
+        match_str_df['matched_per'] = np.round(match_str_df['matched_cnt']/len(user_tokens),2)
+        match_str_df.sort_values(by=['matched_per'], ascending=False, inplace=True, ignore_index=True)
+
+        st.write(match_str_df)
+
+
     
 
 
