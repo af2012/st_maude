@@ -53,7 +53,7 @@ def has_searched(s):
         return True
     return False
 
-st.text_input("Search query (not case sensitive: try epipen, insulin pump, oxygen, oxygen AND tank, empty AND (oxygen OR o2) and tank)", key="full_query")
+st.text_input("Search query (not case sensitive: try epipen, insulin pump, oxygen, oxygen AND tank, empty AND (oxygen OR o2) AND tank)", key="full_query")
 if st.button('Search', type="primary"):
     st.rerun()
 
