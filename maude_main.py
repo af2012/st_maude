@@ -63,6 +63,8 @@ user_input_1 = st.session_state.full_query # retrieve full query from streamlit
 #---- implement search ---#
 if user_input_1:
     user_input_4 = '('+'+'.join(user_input_1.split(' '))+')'   # split with space and combine with '+' and add ( )
+    user_input_4 = re.sub(r'\bor\b', 'OR', user_input_4)       # upper case OR
+    user_input_4 = re.sub(r'\band\b', 'AND', user_input_4)     # upper case AND
     st.write(user_input_4)
     resp = requests.get('https://api.fda.gov/device/event.json?search=mdr_text.text:'+user_input_4+'&limit=500')
     
