@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 '''streamlit-learning.py: A MAUDE search application written in Streamlit'''
 
-__author__ = 'Christopher Mattar'
-__copyright__ = 'Copyright (C) 2024 Christopher Mattar'
+__author__ = 'Allan Fong'
+__copyright__ = 'Copyright (C) 2024 Allan Fong'
 __credits__ = ['Christopher Mattar', 'Allan Fong']
 __license__ = 'GPLv3'
 __version__ = '0.9'
-__maintainer__ = 'Christopher Mattar'
+__maintainer__ = 'Allan Fong'
 __email__ = 'Allan.Fong@medstar.net'
 __status__ = 'Development'
 
@@ -38,14 +38,14 @@ If you have any questions, please reach out to Allan.Fong@medstar.net
 '''
 
 # input fields
-start_date = st.date_input(
-    "Start Date",
-    datetime.datetime.today() - datetime.timedelta(days=90)
-)
-end_date = st.date_input(
-    "End Date",
-    'today'
-)
+#start_date = st.date_input(
+#    "Start Date",
+#    datetime.datetime.today() - datetime.timedelta(days=90)
+#)
+#end_date = st.date_input(
+#    "End Date",
+#    'today'
+#)
 
 @st.cache_data
 def has_searched(s):
@@ -60,6 +60,7 @@ if st.button('Search', type="primary"):
 user_input_1 = st.session_state.full_query # retrieve full query from streamlit
 
 #---- after user enters search ---#
+#---- implement search ---#
 if user_input_1:
     user_input_4 = '('+'+'.join(user_input_1.split(' '))+')'   # split with space and combine with '+' and add ( )
     st.write(user_input_4)
