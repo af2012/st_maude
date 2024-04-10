@@ -87,9 +87,6 @@ if user_input_1:
         df['device_manufacturer_d_name'] = df['device'].apply(lambda x: x[0]['manufacturer_d_name'])
         #df['product_problems_processed'] = df['product_problems'].apply(lambda x: ';'.join(x))
         
-        st.write('Number of search results: ' + str(df.shape[0]))
-        st.write(df)
-        
         # combine mdr_text
         df['combine_text'] = ''
         for i in range(0, df.shape[0]):
@@ -100,6 +97,9 @@ if user_input_1:
             df.loc[i,'combine_text'] = temp_combine_text
         
         df.drop(columns=['type_of_report', 'device', 'mdr_text'], inplace=True)
+
+        st.write('Number of search results: ' + str(df.shape[0]))
+        st.write(df)
     
         ##############################
         # clip text (OR statement can be optimized)
