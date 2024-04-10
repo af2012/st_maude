@@ -3,7 +3,7 @@
 
 __author__ = 'Allan Fong'
 __copyright__ = 'Copyright (C) 2024 Allan Fong'
-__credits__ = ['Christopher Mattar', 'Allan Fong']
+__credits__ = ['Allan Fong', 'Christopher Mattar']
 __license__ = 'GPLv3'
 __version__ = '0.9'
 __maintainer__ = 'Allan Fong'
