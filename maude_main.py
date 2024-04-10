@@ -78,18 +78,18 @@ if user_input_1:
         # shorten columns
         df = df[['report_number', 'event_type', 'type_of_report', 'date_received', 'device', 'product_problems', 'mdr_text']]
         # date_added, device_date_of_manufacturer, date_report, manufacturer_contact_address_1
-        
+
+        ##############################
         # unpack arrays and dicts
         df['type_of_report_processed'] = df['type_of_report'].apply(lambda x: ';'.join(x))
         df['device_brand_name'] = df['device'].apply(lambda x: x[0]['brand_name'])
         df['device_generic_name'] = df['device'].apply(lambda x: x[0]['generic_name'])
         df['device_manufacturer_d_name'] = df['device'].apply(lambda x: x[0]['manufacturer_d_name'])
-        df['product_problems_processed'] = df['product_problems'].apply(lambda x: ';'.join(x))
+        #df['product_problems_processed'] = df['product_problems'].apply(lambda x: ';'.join(x))
         
         st.write('Number of search results: ' + str(df.shape[0]))
         st.write(df)
-
-        ##############################
+        
         # combine mdr_text
         df['combine_text'] = ''
         for i in range(0, df.shape[0]):
@@ -98,7 +98,9 @@ if user_input_1:
             for t in temp_mdr_text:
                 temp_combine_text = temp_combine_text + t['text'] + ' '
             df.loc[i,'combine_text'] = temp_combine_text
-            
+        
+        df.drop(columns=['type_of_report', 'device', 'mdr_text'], inplace=True)
+    
         ##############################
         # clip text (OR statement can be optimized)
         user_input_clean_1 = re.sub(r'(?i)\b(and|or)\b', '', user_input_1)
