@@ -102,6 +102,7 @@ if user_input_1:
                 df.loc[i,'product_problems_processed'] = ';'.join(temp_pp)
 
         df.drop(columns=['type_of_report', 'device', 'mdr_text', 'product_problems'], inplace=True)
+        df.sort_values(by='date_received', ascending=False, inplace=True, ignore_index=True)
 
         st.write('Number of search results: ' + str(df.shape[0]))
         st.write(df)
