@@ -88,6 +88,7 @@ if user_input_1:
         #df['product_problems_processed'] = df['product_problems'].apply(lambda x: ';'.join(x))
         
         # combine mdr_text and product problems
+        df['product_problems_processed'] = 'NA'
         df['combine_text'] = ''
         for i in range(0, df.shape[0]):
             temp_mdr_text = df.loc[i,'mdr_text']
@@ -96,13 +97,10 @@ if user_input_1:
                 temp_combine_text = temp_combine_text + t['text'] + ' '
             df.loc[i,'combine_text'] = temp_combine_text
 
-            temp_pp = df.loc[1,'product_problems']
-            if np.isnan(temp_pp):
-                temp_str = 'NA'
-            else:
-                temp_str = ';'.join(temp_pp)
-            df.loc[i,'product_problems_processed'] = temp_str
-            
+            temp_pp = df.loc[i,'product_problems']
+            if isinstance(temp_pp, list):
+                df.loc[i,'product_problems_processed'] = ';'.join(temp_pp)
+
         df.drop(columns=['type_of_report', 'device', 'mdr_text', 'product_problems'], inplace=True)
 
         st.write('Number of search results: ' + str(df.shape[0]))
